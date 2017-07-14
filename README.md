@@ -18,3 +18,7 @@ The required dependencies to use hmmlearn are
 
 #Installation
  pip install -U --user hmmlearn
+
+
+#securityProject.py:
+#using HMM-Guasian model, plots the graphs for train-data and test-data, over attributes "active-power" and "reactive-power"
