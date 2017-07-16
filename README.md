@@ -17,7 +17,7 @@ $ python anomaly_detection -v
 
 To run the python script using different csv files:
 ```sh
-$ python anomaly_detection --train data/train.csv --test data/test_v1.csv
+$ python anomaly_detection --train data/train/train.csv --test data/test/test_v1.csv
 ```
 
 To see all acceptable commands:

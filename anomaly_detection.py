@@ -26,8 +26,8 @@ def timeit(mainFunction):
 @timeit
 def main():
     power_grid = powergrid_data.datasets(args.train, args.test)
-    print power_grid.data #training data
-    print power_grid.target #testing data
+    # print power_grid.data #training data
+    # print power_grid.target #testing data
 
 if __name__ == '__main__':
     if args.verbose:

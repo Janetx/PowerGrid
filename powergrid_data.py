@@ -13,8 +13,8 @@ class datasets:
 
         if not (os.path.isfile(hdf_file)):
             logging.debug("Creating HDF5 Training and Testing Files")
-            train_data = pd.read_csv(train)
-            test_data = pd.read_csv(test)
+            train_data = pd.read_csv(train, parse_dates=True)
+            test_data = pd.read_csv(test, parse_dates=True)
 
             train_data.to_hdf(hdf_file, "train_data", mode='w', format='table')
             test_data.to_hdf(hdf_file, 'test_data', mode='a', format='table')
