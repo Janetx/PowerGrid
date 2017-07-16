@@ -1,0 +1,8 @@
+# python pyc
+*.pyc
+
+# hdf5 data
+*.h5
+
+# csv data
+*.csv
