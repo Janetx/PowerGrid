@@ -9,18 +9,23 @@ class datasets:
         train_dir = os.path.dirname(train)
         test_dir = os.path.dirname(test)
 
-        hdf_file = os.path.join("data", "hdf", "hdf_data.h5")
+        train_data = pd.read_csv(train)
+        train_data.dropna()
+        train_data['DateTime'] = train_data['Date'] + ' ' + train_data['Time']
+        train_data['Date'] = pd.to_datetime(train_data['Date'], format='%d/%m/%Y')
+        train_data['Time'] = pd.to_datetime(train_data['Time'], format='%H:%M:%S')
+        train_data['DateTime'] = pd.to_datetime(train_data['DateTime'], format='%d/%m/%Y %H:%M:%S')
+        
+        
+        test_data = pd.read_csv(test)
+        test_data.dropna()
+        test_data['DateTime'] = test_data['Date'] + ' ' + test_data['Time']
+        test_data['Date'] = pd.to_datetime(test_data['Date'], format='%d/%m/%Y')
+        test_data['Time'] = pd.to_datetime(test_data['Time'], format='%H:%M:%S')
+        test_data['DateTime'] = pd.to_datetime(test_data['DateTime'], format='%d/%m/%Y %H:%M:%S')
 
-        if not (os.path.isfile(hdf_file)):
-            logging.debug("Creating HDF5 Training and Testing Files")
-            train_data = pd.read_csv(train, parse_dates=True)
-            test_data = pd.read_csv(test, parse_dates=True)
-
-            train_data.to_hdf(hdf_file, "train_data", mode='w', format='table')
-            test_data.to_hdf(hdf_file, 'test_data', mode='a', format='table')
-
-        self._train_data = pd.read_hdf(hdf_file, "train_data")
-        self._test_data = pd.read_hdf(hdf_file, 'test_data')
+        self._train_data = train_data
+        self._test_data = test_data
 
     @property
     def data(self):
