@@ -22,3 +22,15 @@ The required dependencies to use hmmlearn are
 
 #securityProject.py:
 #using HMM-Guasian model, plots the graphs for train-data and test-data, over attributes "active-power" and "reactive-power"
+
+
+#Decisions:
+#Year:2007
+#Month:May
+
+Tasks:
+plots:
+1. 2007 full year graph -Hao
+2. 2007 May first week -Sam
+3. weekdays for first week of 2007 May -Janet
+4. weekends for first week of 2007 May -Rafay
