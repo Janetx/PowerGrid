@@ -6,34 +6,67 @@ import powergrid_data as powergrid
 
 data = powergrid.datasets("train.csv", "test_v1.csv")
 
-# NOTE TO SELF: STARTING POINT...(1) Find Week # of the month (2) Print only Week # x (3) Plot Findings (4) Average each day and Plot (5) Plot each week
+# NOTE TO SELF: STARTING POINT...1) Plot each week of the Month of May on a single Plot (2) More Generalized Line
 data_power = data.data[['Date','DateTime','Global_active_power','Global_reactive_power', 'Global_intensity']].dropna()
 data2007_may = data_power[(data_power['Date'].dt.month == 5) & (data_power['Date'].dt.year == 2007) & (data_power['Date'].dt.day < 7)]
-print(data2007_may)
 
+'''
+#data_power = data.data[['Date','DateTime','Global_active_power']].dropna()
+#data2007_may = data_power[(data_power['Date'].dt.month == 5) & (data_power['Date'].dt.year == 2007)]
+'''
+
+#Normalization
+df = pd.DataFrame(data2007_may)
+'''
+avg_gactive = df['Global_active_power'].mean()
+normalized_data2007_may = data2007_may['Global_active_power']/avg_gactive
+'''
+# (1) Take Average of Full Data Set
+avg_gactive = df['Global_active_power'].mean()
+avg_greactive = df['Global_reactive_power'].mean()
+avg_gintensity = df['Global_intensity'].mean()
+# (2) Divide each data point against the average = (Data/Avg)
+normalized_data2007_may_ga = data2007_may['Global_active_power']/avg_gactive
+normalized_data2007_may_gr = data2007_may['Global_reactive_power']/avg_gactive
+normalized_data2007_may_gi = data2007_may['Global_intensity']/avg_gactive
+
+# Plot
 x = data2007_may['DateTime']
 y = data2007_may['Global_active_power']
+yn = normalized_data2007_may_ga
+
 y2 = data2007_may['Global_reactive_power']
+y2n = normalized_data2007_may_gr
+
 y3 = data2007_may['Global_intensity']
+y3n = normalized_data2007_may_gi
 
 plt.plot(x, y, label='Active Power')
-plt.plot(x, y2, label='Reactive Power')
-plt.plot(x, y3, label='Global Intensity')
+plt.plot(x, yn, label='Normalized Active Power')
 plt.xlabel('DateTime')
 plt.ylabel('Power')
-plt.title('Training Data: Global Active and Reactive Power, and Global Intensity')
+plt.title('Training Data: Global Active and Normalized Global Active Power')
+plt.legend()
+plt.show()
+
+plt.plot(x, y2, label='Reactive Power')
+plt.plot(x, y2n, label='Normalized Reactive Power')
+plt.xlabel('DateTime')
+plt.ylabel('Power')
+plt.title('Training Data: Global Reactive and Normalized Global Reactive Power')
+plt.legend()
+plt.show()
+
+plt.plot(x, y3, label='Global Intensity')
+plt.plot(x, y3n, label='Normalized Global Intensity')
+plt.xlabel('DateTime')
+plt.ylabel('Intensity')
+plt.title('Training Data: Global Intensity and Normalized Global Intensity')
+plt.legend()
 plt.show()
 
 
-#data_07 = data_power[data_power['DateTime'].isin(pd.date_range("05/01/2007", "05/07/2007", freq='min'))]
-#mean_2007 = in_2007.mean()
-#print(in_2007)
-#print(mean_2007)
 
-# NOT QUITE...NaN returned!
-# Refer to data['Date] to find 2007; May; and eventually to derive day of the week
-#gap_07w1 = data_power['Global_active_power'].where(data_power['DateTime'].isin(pd.date_range("05/01/2007", "05/07/2007", freq='min')))
-#print(gap_07w1)
 
 '''
 # Full Data Set Global Active and Reactive
