@@ -3,32 +3,14 @@
 
 ### Installation
 
-Install [Anaconda] Python 2.7
+Install [Anaconda] Python 3
+Install hmmlearn library by pip install -U --user hmmlearn
 
-To run the python script:
-```sh
-$ python anomaly_detection
-```
+## Source code
 
-To run the python script with debugging mode:
-```sh
-$ python anomaly_detection -v
-```
-
-To run the python script using different csv files:
-```sh
-$ python anomaly_detection --train data/train/train.csv --test data/test/test_v1.csv
-```
-
-To see all acceptable commands:
-```sh
-$ python anomaly_detection -h
-```
-
-> Due to the large size of the csv files contributing to the problem of limited github repo size, the files were removed. The contributor must manually put the test_*.csv files in data/test and train.csv in data/train directory
-
-
+Most of the implementation is done in python jupyter notebook. Run then by typing jupyter notebook on cmd. Change the path of test and train data as specified in notebooks and run.
 
 [//]: # (Reference links used in the doc)
 
 [Anaconda]: <https://www.continuum.io/downloads/>
+[hmmlearn]: <https://github.com/hmmlearn/hmmlearn>
