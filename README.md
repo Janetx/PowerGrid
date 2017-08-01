@@ -4,7 +4,7 @@
 ### Installation
 
 Install [Anaconda] Python 3
-Install hmmlearn library by pip install -U --user hmmlearn
+Install [hmmlearn] library by pip install -U --user hmmlearn
 
 ## Source code
 
