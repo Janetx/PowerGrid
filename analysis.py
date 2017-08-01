@@ -12,7 +12,7 @@ from matplotlib.dates import MO, TU, WE, TH, FR, SA, SU
 
 class analyzer:
 
-    months = {'January': 1, 'Feburary': 2, 'March': 3, 'April': 4, 'May': 5, 'June': 6,'July': 7, 'August': 8, 'September': 9, 'October': 10, 'November': 11, 'December': 12}
+    months = {'January': 1, 'February': 2, 'March': 3, 'April': 4, 'May': 5, 'June': 6,'July': 7, 'August': 8, 'September': 9, 'October': 10, 'November': 11, 'December': 12}
     days = {'Monday': 0, 'Tuesday': 1, 'Wednesday': 2, 'Thursday': 3, 'Friday': 4, 'Saturday': 5, 'Sunday': 6}
 
     def __init__(self, datasets):
@@ -33,10 +33,14 @@ class analyzer:
 
         return parsed_train_dates, parsed_train_features, parsed_test_dates, parsed_test_features
 
-    def _parser_test_train(self, dates, features, year = None, month = None, day = None, hour = None, minutes  = None, seconds = None):
+    def _parser_test_train(self, dates, features, year = None, month = [None], day = None, hour = None, minutes  = None, seconds = None):
         true_value = np.ones(dates.size, dtype=bool)
         YearFilter = (dates.dt.year == year) if (year != None) else true_value
-        MonthFilter = (dates.dt.month == self.months[month]) if (month != None) else true_value
+        MonthFilter = true_value == False
+        for m in month:
+            MonthFilter |= (dates.dt.month == self.months[m]) if (m != None) else true_value
+            
+            
         DayFilter = (dates.dt.day == day) if (day != None) else true_value
         HourFilter = (dates.dt.hour == hour) if (hour != None) else true_value
         MinutesFilter = (dates.dt.minute == minutes) if (minutes != None) else true_value
